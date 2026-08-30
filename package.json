@@ -1,0 +1,23 @@
+{
+  "name": "fvtt-tooling",
+  "type": "module",
+  "repository": {
+    "url": "https://github.com/mkahvi/fvtt-tooling"
+  },
+  "private": true,
+  "devDependencies": {
+    "@foundryvtt/foundryvtt-cli": "^3.0.4",
+    "lightningcss": "^1.33.0",
+    "listr2": "^11.0.0",
+    "picocolors": "^1.1.1",
+    "rolldown": "^1.2.4",
+    "yargs": "^18.1.0"
+  },
+  "scripts": {
+    "all": "node ./scripts/build.mjs",
+    "js": "node ./scripts/build-js.mjs",
+    "css": "node ./scripts/build-css.mjs",
+    "sync": "node ./scripts/build-sync.mjs",
+    "packs": "node ./scripts/packs.mjs"
+  }
+}
