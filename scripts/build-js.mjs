@@ -42,6 +42,8 @@ export async function build({ mode = 'dev' } = {}) {
 	const outJS = esm.output.filter(e => e.type === 'chunk');
 	const outMap = esm.output.filter(e => e.type === 'asset');
 
+	fs.mkdirSync(path.posix.join("..", CONFIG.dist), { recursive: true });
+
 	// Write all files
 	await Promise.all(
 		esm.output.map(e => fs.promises.writeFile(path.posix.join("..", CONFIG.dist, e.fileName), e.type === 'chunk' ? e.code : e.source)),

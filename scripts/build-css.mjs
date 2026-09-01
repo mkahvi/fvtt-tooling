@@ -46,6 +46,8 @@ export async function build(logger = console.log) {
 
 	const t1 = performance.now();
 
+	fs.mkdirSync(path.posix.join("..", CONFIG.dist), { recursive: true });
+
 	await Promise.all([
 		fs.promises.writeFile(output, css),
 		fs.promises.writeFile(`${output}.map`, map),
