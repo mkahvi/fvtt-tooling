@@ -11,7 +11,7 @@ Following instructions assumes you install this in `utils`, which is not require
 Add submodule
 
 ```sh
-git submodule add <> utils
+git submodule add https://github.com/mkahvi/fvtt-tooling utils
 ```
 
 ### Configuration
@@ -61,11 +61,11 @@ Simple `package.json` setup for the main project.
 
 ```json
 "scripts": {
- "build:all": "npm run utils/all",
- "build:js": "npm run utils/js",
- "build:css": "npm run utils/css",
- "build:sync": "npm run utils/sync",
- "packs": "npm run utils/packs",
+ "build:all": "npm --prefix=utils run all",
+ "build:js": "npm --prefix=utils run js",
+ "build:css": "npm --prefix=utils run css",
+ "build:sync": "npm --prefix=utils run sync",
+ "packs": "npm --prefix=utils run packs",
 }
 ```
 
@@ -74,9 +74,9 @@ Example usage of above
 ```sh
 npm run build:js
 npm run packs compile
-npm run packs compile packId
+npm run packs compile pants bags
 npm run packs extract
-npm run packs extract packId
+npm run packs extract shoes pencils
 ```
 
 ### Initializing submodule
