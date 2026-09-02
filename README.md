@@ -39,7 +39,7 @@ Add the following to your `package.json`. See `package.sample.json` for actual e
 }
 ```
 
-`PACK_TRANSFORMERS` is for a script file that exports several functions for passing to pack compile/extract workflow.
+`packs.transformers` is for a script file that exports several functions for passing to pack compile/extract workflow.
 
 Modify `package.json` with following:
 
