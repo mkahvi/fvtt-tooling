@@ -81,6 +81,8 @@ npm run packs extract shoes pencils
 
 ### Initializing submodule
 
+You need to run `npm ci` either in the parent project or in the submodule directory to install dependencies.
+
 When cloning the main project after the submodule has been added, you need to run the following:
 
 ```sh
