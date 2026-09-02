@@ -89,6 +89,12 @@ git submodule update --init --recursive
 
 This is not necessary for the user who added the submodule, since adding initializes it already.
 
+### Updating submodule
+
+```sh
+git submodule update --remove --recursive
+```
+
 ## License
 
 Public Domain / [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
