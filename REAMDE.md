@@ -16,7 +16,7 @@ git submodule add <> utils
 
 ### Configuration
 
-Add the following to your `package.json`. See `.package.sample.json` for actual example.
+Add the following to your `package.json`. See `package.sample.json` for actual example.
 
 ```json
 {
