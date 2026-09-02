@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "build": {
+    "dist": "dist",
+    "manifest": "module.json",
+    "css": {
+      "path": "css/myPackage.css"
+    },
+    "js": {
+      "path": "src/myPackage.mjs"
+    },
+    "packs": {
+      "path": "packs",
+      "transformers": "scripts/packs/transformers.mjs",
+      "folders": true,
+      "yaml": true
+    }
+  }
+}
