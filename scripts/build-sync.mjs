@@ -34,7 +34,7 @@ async function copyToRoot(source) {
 
 	const t1 = performance.now();
 	const tcp = Math.floor((t1 - t0) * 10) / 10;
-	log.info(`/${pc.bold(base)} ` + pc.dim(`(${tcp} ms)`));
+	log.info(pc.bold(base), pc.dim(`(in ${tcp} ms)`));
 }
 
 async function copyRelative(source) {
@@ -58,7 +58,7 @@ async function copyRelative(source) {
 	const trm = Math.round((t1 - t0) * 10) / 10;
 	const tcp = Math.round((t2 - t1) * 10) / 10;
 	const tt = Math.round((t2 - t0) * 10) / 10;
-	log.info(`${pc.dim('/')}${pc.bold(source)}/** ` + pc.dim(`(${tt} ms)`));
+	log.info(`${pc.bold(source)}/**`, pc.dim(`(in ${tt} ms)`));
 }
 
 export async function sync() {
