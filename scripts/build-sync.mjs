@@ -24,7 +24,7 @@ const log = new Logger({ category: 'Copy' });
 async function copyToRoot(source) {
 	const t0 = performance.now();
 	const base = path.posix.basename(source);
-	const dest = path.posix.join(CONFIG.dist, base);
+	const dest = path.posix.join("..", CONFIG.dist, base);
 
 	if (!fs.existsSync(path.posix.join("..", CONFIG.dist))) {
 		fs.mkdirSync(path.posix.join("..", CONFIG.dist), { recursive: true });
