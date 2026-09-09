@@ -1,5 +1,5 @@
 /**
- * Sync Files
+ * Sync files
  */
 
 import pc from 'picocolors';
@@ -11,30 +11,27 @@ import { copyFile } from './lib/fs-lib.mjs';
 import pkg from "../../package.json" with { type: "json" };
 const CONFIG = pkg.build;
 
-const CONFIG = {
-	STATIC_FILES: ['README.md', 'LICENSE', CONFIG.manifest],
-	STATIC_FOLDERS: ['lang', 'templates'],
+const FILES = [...(CONFIG.sync?.files ?? []), CONFIG.manifest, 'README.md', 'LICENSE'];
+const FOLDERS = [...(CONFIG.sync?.folders ?? []), "lang", "templates"]
 
-	WATCH_IGNORE: [`${CONFIG.dist}/`, 'node_modules/', '.git/', 'scripts/', /\.(yaml|d\.ts)$/],
+const WATCH_IGNORE = [`${CONFIG.dist}/`, 'node_modules/', '.git/', 'scripts/', /\.(yaml|d\.ts)$/, "foundry/"]
 
-	CHECK_INTERVAL: 30_000,
-	get SLEEP_THRESHOLD() { return this.CHECK_INTERVAL * 2; },
-
-	DEBUG: false,
-	REPORT_MODIFIED: {
-		CSS: true,
-		JS: true,
-		HBS: true,
-	},
-};
+const CHECK_INTERVAL = 30_000;
+const SLEEP_THRESHOLD = CHECK_INTERVAL * 2;
 
 const log = new Logger({ category: 'Copy' });
 
 async function copyToRoot(source) {
 	const t0 = performance.now();
 	const base = path.posix.basename(source);
-	const dest = path.posix.join(CONFIG.DEST_DIR, base);
-	await copyFile(source, dest, false);
+	const dest = path.posix.join(CONFIG.dist, base);
+
+	if (!fs.existsSync(path.posix.join("..", CONFIG.dist))) {
+		fs.mkdirSync(path.posix.join("..", CONFIG.dist), { recursive: true });
+	}
+
+	await copyFile(path.posix.join("..", source), dest, false);
+
 	const t1 = performance.now();
 	const tcp = Math.floor((t1 - t0) * 10) / 10;
 	log.info(`/${pc.bold(base)} ` + pc.dim(`(${tcp} ms)`));
@@ -42,7 +39,7 @@ async function copyToRoot(source) {
 
 async function copyRelative(source) {
 	const t0 = performance.now();
-	const dest = path.posix.join(CONFIG.DEST_DIR, source);
+	const dest = path.posix.join(CONFIG.dist, source);
 	if (fs.existsSync(dest)) {
 		fs.rmdirSync(dest, { recursive: true, force: true });
 	}
@@ -58,14 +55,14 @@ async function copyRelative(source) {
 
 export async function sync() {
 	const promises = [];
-	for (const fn of CONFIG.STATIC_FILES) {
+	for (const fn of FILES) {
 		const p = copyToRoot(fn);
 		promises.push(p);
 	}
 
 	await Promise.all(promises);
 
-	for (const dir of CONFIG.STATIC_FOLDERS) {
+	for (const dir of FOLDERS) {
 		if (fs.existsSync(dir))
 			await copyRelative(dir);
 	}
