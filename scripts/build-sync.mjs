@@ -39,12 +39,20 @@ async function copyToRoot(source) {
 
 async function copyRelative(source) {
 	const t0 = performance.now();
-	const dest = path.posix.join(CONFIG.dist, source);
-	if (fs.existsSync(dest)) {
-		fs.rmdirSync(dest, { recursive: true, force: true });
+
+	const origin = path.posix.join("..", source);
+	if (!fs.existsSync(origin)) return;
+
+
+	const dest = path.posix.join("..", CONFIG.dist, source);
+	const destFolder = path.posix.join("..", CONFIG.dist);
+
+	if (!fs.existsSync(destFolder)) {
+		fs.mkdirSync(destFolder, { recursive: true });
 	}
+
 	const t1 = performance.now();
-	await fs.promises.cp(source, dest, { recursive: true });
+	await fs.promises.cp(path.posix.join("..", source), dest, { recursive: true });
 	const t2 = performance.now();
 
 	const trm = Math.round((t1 - t0) * 10) / 10;
@@ -63,8 +71,7 @@ export async function sync() {
 	await Promise.all(promises);
 
 	for (const dir of FOLDERS) {
-		if (fs.existsSync(dir))
-			await copyRelative(dir);
+		await copyRelative(dir);
 	}
 }
 
