@@ -58,7 +58,7 @@ async function copyRelative(source) {
 	const trm = Math.round((t1 - t0) * 10) / 10;
 	const tcp = Math.round((t2 - t1) * 10) / 10;
 	const tt = Math.round((t2 - t0) * 10) / 10;
-	log.info(`/${pc.bold(source)}/** ` + pc.dim(`(${tt} ms)`));
+	log.info(`${pc.dim('/')}${pc.bold(source)}/** ` + pc.dim(`(${tt} ms)`));
 }
 
 export async function sync() {

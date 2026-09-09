@@ -21,12 +21,12 @@ const isDev = process.argv.slice(2).some(arg => arg === '--dev');
 
 async function buildJS() {
 	const result = await js.build({ mode: isDev ? 'dev' : 'prod' });
-	log.info('JS', pc.dim("/"), `${pc.bold(path.basename(result.file.main))}`, pc.dim(`(in ${result.time.total} ms)`));
+	log.info('JS', pc.dim("/") + `${pc.bold(path.basename(result.file.main))}`, pc.dim(`(in ${result.time.total} ms)`));
 }
 
 async function buildCSS() {
 	const result = await css.build();
-	log.info('CSS', pc.dim("/"), `${pc.bold(path.basename(result.file.main))}`, pc.dim(`(in ${result.time.total} ms)`));
+	log.info('CSS', pc.dim("/") + `${pc.bold(path.basename(result.file.main))}`, pc.dim(`(in ${result.time.total} ms)`));
 }
 
 async function syncFiles() {
