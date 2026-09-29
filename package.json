@@ -4,6 +4,9 @@
   "repository": {
     "url": "https://github.com/mkahvi/fvtt-tooling"
   },
+  "engines": {
+    "node": ">=26"
+  },
   "private": true,
   "devDependencies": {
     "@foundryvtt/foundryvtt-cli": "^3.0.4",
