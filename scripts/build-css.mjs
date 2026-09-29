@@ -77,7 +77,7 @@ export async function build(logger = console.log) {
 }
 
 export async function printStats(result, logger) {
-	logger.info(`Bundled ${pc.bold(result.file.main)} ` + pc.dim(`(${result.time.total} ms; bundle: ${result.time.bundle} ms; write ${result.time.write} ms)`));
+	logger.info(`Bundled ${pc.bold(result.file.main)} ` + pc.dim(`in ${result.time.total} ms (bundle: ${result.time.bundle} ms; write ${result.time.write} ms)`));
 
 	const { size: tSize, files: tFiles } = dirSize(path.dirname(INPUT), ['.css']);
 

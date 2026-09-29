@@ -77,7 +77,7 @@ export async function build({ mode = 'dev' } = {}) {
 }
 
 export async function printStats(result, logger) {
-	logger.info(`Bundled /${pc.bold(path.basename(CONFIG.js.path))}`, pc.dim(`in ${pc.bold(result.time.total)} ms`), pc.dim(`(bundle: ${pc.bold(result.time.bundle)} ms; write ${pc.bold(result.time.write)} ms)`));
+	logger.info(`Bundled ${pc.bold(path.basename(CONFIG.js.path))}`, pc.dim(`in ${pc.bold(result.time.total)} ms`), pc.dim(`(bundle: ${pc.bold(result.time.bundle)} ms; write ${pc.bold(result.time.write)} ms)`));
 
 	// gzip size (server to client transfer size)
 	const cs = sumArray(await Promise.all(result.content.bundle.map(e => compressedSize(e))));
