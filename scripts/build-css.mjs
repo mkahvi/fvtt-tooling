@@ -27,7 +27,7 @@ function bundle() {
 		sourceMap: true,
 		analyzeDependencies: false,
 		// Without targets LCSS produces outdated CSS
-		targets: {
+		targets: CONFIG.css.targets ?? {
 			chrome: 132, // Equivalent of Electron (v34.4) for v13.351
 			// Chrome v142 for Foundry v14
 		},
